@@ -23,8 +23,8 @@ module.exports = function(config) {
 
 		files : [
 			{ pattern: 'node_modules/**',                  included: false, served: true, watched: false },
-			'tests/*.js',
-			'withElement.js'
+			'withElement.js',
+			'tests/*.js'
 		],
 
 		autoWatch : true,

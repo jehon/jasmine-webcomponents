@@ -1,26 +1,26 @@
+/* eslint-env jasmine */
+
+class TestElement extends HTMLElement {
+	constructor() {
+		super();
+		this.test = 0;
+	}
+
+	incr() {
+		this.test++;
+	}
+}
+window.customElements.define('test-element', TestElement);
+
 describe('root test', function() {
-	
-})
-
-
-window.jasmine = jasmineRequire.core(jasmineRequire);
-jasmineRequire.html(jasmine);
-var env = jasmine.getEnv();
-var jasmineInterface = jasmineRequire.interface(jasmine, env);
-jasmineInterface.before = jasmineInterface.beforeEach;
-jasmineInterface.after = jasmineInterface.afterEach;
-jasmineInterface.context = jasmineInterface.describe;
-
-waits(0);
-beforeEach(function(){
-	waitsFor(function(){
-	  if (typeof(CustomElements) == 'undefined') return false;
-	  return CustomElements.ready;
+	it('works', function() {
+		expect(true).toBeTruthy();
 	});
 });
 
-if (typeof window == "undefined" && typeof exports == "object") {
-  extend(exports, jasmineInterface);
-} else {
-  extend(window, jasmineInterface);
-}
+webDescribe('webDescribe.js', '<div></div>', function(element) {
+	it('should work', function() {
+		expect(element()).not.toBe(null);
+		expect(element().tagName).toBe('DIV');
+	});
+});
