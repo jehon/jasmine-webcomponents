@@ -23,7 +23,7 @@
 // }
 
 
-function webDescribe(title, html, fn) {
+function withElement(title, html, fn) {
 	return describe(title, function() {
 		let div;
 		let element;
