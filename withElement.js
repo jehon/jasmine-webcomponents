@@ -1,4 +1,5 @@
 /* eslint-env jasmine */
+/* export withElement */
 
 // window.jasmine = jasmineRequire.core(jasmineRequire);
 // jasmineRequire.html(jasmine);
