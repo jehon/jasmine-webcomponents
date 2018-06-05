@@ -1,0 +1,13 @@
+{
+    "name": "jasmine-webcomponent",
+    "version": "0.0.1",
+    "license": "MIT",
+    "devDependencies": {
+        "eslint": "^4.19.1",
+        "karma": "^2.0.2"
+    },
+    "scripts": {
+        "start": "karma",
+        "eslint": "eslint"
+    }
+}
