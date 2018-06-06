@@ -47,54 +47,11 @@ function withElement(options, fn) {  // eslint-disable-line no-unused-vars
 
 			document.body.appendChild(div);
 
-			let check = (el) => {
-				if (el instanceof HTMLUnknownElement) {
-					return el.tagName;
-				}
-				for(let i in el.children) {
-					let res = check(el.children[i]);
-					if (res !== true) {
-						return res;
-					}
-				}
-				return true;
-			};
-
-			let i = 0;
-			let interval = setInterval(() => {
-				if (i++ >= 40) {
-					// console.log("too much tests", div.firstChild);
-					clearInterval(interval);
-					done.fail('testComponent: component could not be instanciated ', html);
-					return;
-				}
-
-				// Do we have a first child?
-				if (!div.firstChild) {
-					// console.log("no first child");
-					return ;
-				}
-
-				// Check all object for HTMLUnknownElements
-				if (!check(div.firstChild)) {
-					// console.log("checking child nodes does not work");
-					return;
-				}
-
-				// Happy case
-				clearInterval(interval);
-				console.log('Built at i=', i);
-				done();
-			}, 100);
+			setTimeout(done, options.setupTime);
 		});
 
+		// Register removing it afterwards
 		afterEach(function() {
-			// For debugging purpose, sometimes, we want to keep the element...
-			if (this.jh_keep) {
-				return;
-			}
-
-			// Register removing it afterwards
 			document.body.removeChild(div);
 		});
 
