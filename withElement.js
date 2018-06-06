@@ -1,7 +1,16 @@
 /* eslint-env jasmine */
 /* exported withElement */
 
-function withElement(html, fn) {  // eslint-disable-line no-unused-vars
+function withElement(options, fn) {  // eslint-disable-line no-unused-vars
+	if (typeof(options) != 'object') {
+		options = {
+			html: options
+		};
+		options = Object.assign(options, {
+			title: '',
+			setupTime: 1
+		});
+	}
 	return describe('', function() {
 		let div;
 		let element;
@@ -14,16 +23,16 @@ function withElement(html, fn) {  // eslint-disable-line no-unused-vars
 
 			div = document.createElement('div');
 			div.style='border: red solid 1px; min-height: 10px';
-			div.innerHTML = html.trim();
+			div.innerHTML = options.html.trim();
 
 			// - Add the title for completeness
 			let h3 = document.createElement('h3');
-			h3.innerHTML = 'Test: ';
+			h3.innerHTML = 'Test: ' + options.title;
 			div.appendChild(h3);
 
 			// - Dump code for info
 			let pre = document.createElement('pre');
-			pre.innerHTML = html.split('<').join('&lt;').split('>').join('&gt');
+			pre.innerHTML = options.html.split('<').join('&lt;').split('>').join('&gt');
 			div.appendChild(pre);
 
 			// Add some styling
@@ -34,6 +43,7 @@ function withElement(html, fn) {  // eslint-disable-line no-unused-vars
         		}
       		`;
 			div.appendChild(style);
+			element = div.firstChild;
 
 			document.body.appendChild(div);
 
@@ -73,7 +83,6 @@ function withElement(html, fn) {  // eslint-disable-line no-unused-vars
 
 				// Happy case
 				clearInterval(interval);
-				element = div.firstChild;
 				console.log('Built at i=', i);
 				done();
 			}, 100);
