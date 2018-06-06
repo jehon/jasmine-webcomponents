@@ -1,7 +1,7 @@
 {
   "name": "jasmine-webcomponents",
   "version": "0.0.1",
-  "author": "Jean Honlet",
+  "author": "Jean Honlet (https://github.com/jehon)",
   "repository": {
     "type": "git",
     "url": "https://github.com/jehon/jasmine-webcomponents.git"
