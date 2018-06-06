@@ -5,12 +5,8 @@ function withElement(html, fn) {  // eslint-disable-line no-unused-vars
 	return describe('', function() {
 		let div;
 		let element;
-		let oldTimeout;
 
 		beforeEach(function(done) {
-			// Set an acceptable timeout
-			oldTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-			jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 
 			// Build up the element
 
@@ -91,7 +87,6 @@ function withElement(html, fn) {  // eslint-disable-line no-unused-vars
 
 			// Register removing it afterwards
 			document.body.removeChild(div);
-			jasmine.DEFAULT_TIMEOUT_INTERVAL = oldTimeout;
 		});
 
 		it('should initialize the object correctly', function() {
