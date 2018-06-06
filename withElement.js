@@ -6,21 +6,20 @@ function withElement(options, fn) {  // eslint-disable-line no-unused-vars
 		options = {
 			html: options
 		};
-		options = Object.assign(options, {
+		options = Object.assign({
 			title: '',
-			setupTime: 1
-		});
+			setupTime: 1,
+			assertElementIsNotNull: false
+		}, options);
 	}
 	return describe('', function() {
 		let div;
 		let element;
 
 		beforeEach(function(done) {
-
 			// Build up the element
 
 			// - The real component
-
 			div = document.createElement('div');
 			div.style='border: red solid 1px; min-height: 10px';
 			div.innerHTML = options.html.trim();
@@ -46,7 +45,6 @@ function withElement(options, fn) {  // eslint-disable-line no-unused-vars
 			element = div.firstChild;
 
 			document.body.appendChild(div);
-
 			setTimeout(done, options.setupTime);
 		});
 
@@ -55,10 +53,13 @@ function withElement(options, fn) {  // eslint-disable-line no-unused-vars
 			document.body.removeChild(div);
 		});
 
-		it('should initialize the object correctly', function() {
-			expect(element).not.toBeUndefined();
-			expect(element).not.toBeNull();
-		});
+		if (options.assertElementIsNotNull) {
+			// Make some tests just for completeness
+			it('should initialize the object correctly', function() {
+				expect(element).not.toBeUndefined();
+				expect(element).not.toBeNull();
+			});
+		}
 
 		// We need to pass it as a function, because as we start this function
 		// element is not already defined
