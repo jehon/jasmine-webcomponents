@@ -1,6 +1,16 @@
 {
   "name": "jasmine-webcomponents",
   "version": "0.0.1",
+  "author": "Jean Honlet",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jehon/jasmine-webcomponents.git"
+  },
+  "keywords": [
+      "jasmine", "web components", "karma", "testing"
+  ],
+  "description": "Allow web components to be tested in karma-jasmine",
+  "bugs": "https://github.com/jehon/jasmine-webcomponents/issues",
   "license": "MIT",
   "main": "lib/index.js",
   "devDependencies": {
