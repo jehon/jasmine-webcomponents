@@ -8,11 +8,13 @@ module.exports = function(config) {
 			// 'karma-firefox-launcher',
 			'karma-jasmine',
 			'karma-coverage',
-			'karma-html-reporter'
+			'karma-html-reporter',
+			'jasmine-webcomponents'
 		],
 
 		frameworks : [
 			'jasmine',
+			'jasmine-webcomponents'
 		],
 
 		reporters : [
@@ -22,8 +24,6 @@ module.exports = function(config) {
 		],
 
 		files : [
-			{ pattern: 'node_modules/**',                  included: false, served: true, watched: false },
-			'withElement.js',
 			'tests/*.js'
 		],
 
