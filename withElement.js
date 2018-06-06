@@ -56,10 +56,10 @@ function withElement(html, fn) {
 			// Add some styling
 			let style = document.createElement('style');
 			style.innerHTML = `
-        pre {
-          background-color: yellow;
-        }
-      `;
+        		pre {
+			        background-color: yellow;
+        		}
+      		`;
 			div.appendChild(style);
 
 			document.body.appendChild(div);
@@ -77,9 +77,9 @@ function withElement(html, fn) {
 				return true;
 			};
 
-			let i = 40;
+			let i = 0;
 			let interval = setInterval(() => {
-				if (i-- <= 0) {
+				if (i++ >= 40) {
 					// console.log("too much tests", div.firstChild);
 					clearInterval(interval);
 					done.fail('testComponent: component could not be instanciated ', html);
@@ -101,6 +101,7 @@ function withElement(html, fn) {
 				// Happy case
 				clearInterval(interval);
 				element = div.firstChild;
+				console.log('Built at i=', i);
 				done();
 			}, 100);
 		});
