@@ -1,38 +1,8 @@
 /* eslint-env jasmine */
-<<<<<<< HEAD
-/* export withElement */
-
-// window.jasmine = jasmineRequire.core(jasmineRequire);
-// jasmineRequire.html(jasmine);
-// var env = jasmine.getEnv();
-// var jasmineInterface = jasmineRequire.interface(jasmine, env);
-// jasmineInterface.before = jasmineInterface.beforeEach;
-// jasmineInterface.after = jasmineInterface.afterEach;
-// jasmineInterface.context = jasmineInterface.describe;
-
-// waits(0);
-// beforeEach(function(){
-// 	waitsFor(function(){
-// 	  if (typeof(CustomElements) == 'undefined') return false;
-// 	  return CustomElements.ready;
-// 	});
-// });
-
-// if (typeof window == "undefined" && typeof exports == "object") {
-//   extend(exports, jasmineInterface);
-// } else {
-//   extend(window, jasmineInterface);
-// }
-
-
-function withElement(html, fn) {
-	return describe('', function() {
-=======
 /* exported withElement */
 
-function withElement(title, html, fn) {  // eslint-disable-line no-unused-vars
-	return describe(title, function() {
->>>>>>> 892841ba589eb2d56f357d04a1eda1ddeb0ace2a
+function withElement(html, fn) {  // eslint-disable-line no-unused-vars
+	return describe('', function() {
 		let div;
 		let element;
 		let oldTimeout;
