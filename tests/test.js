@@ -19,7 +19,7 @@ describe('root test', function() {
 	});
 });
 
-withElement('webDescribe.js', '<div></div>', function(element) {
+withElement('<div></div>', function(element) {
 	it('should work', function() {
 		expect(element()).not.toBe(null);
 		expect(element().tagName).toBe('DIV');

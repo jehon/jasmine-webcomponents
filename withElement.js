@@ -24,8 +24,8 @@
 // }
 
 
-function withElement(title, html, fn) {
-	return describe(title, function() {
+function withElement(html, fn) {
+	return describe('', function() {
 		let div;
 		let element;
 		let oldTimeout;
@@ -45,7 +45,7 @@ function withElement(title, html, fn) {
 
 			// - Add the title for completeness
 			let h3 = document.createElement('h3');
-			h3.innerHTML = 'Test: "' + title + '"';
+			h3.innerHTML = 'Test: ';
 			div.appendChild(h3);
 
 			// - Dump code for info
