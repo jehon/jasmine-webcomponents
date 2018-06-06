@@ -1,30 +1,7 @@
 /* eslint-env jasmine */
-/* export withElement */
+/* exported withElement */
 
-// window.jasmine = jasmineRequire.core(jasmineRequire);
-// jasmineRequire.html(jasmine);
-// var env = jasmine.getEnv();
-// var jasmineInterface = jasmineRequire.interface(jasmine, env);
-// jasmineInterface.before = jasmineInterface.beforeEach;
-// jasmineInterface.after = jasmineInterface.afterEach;
-// jasmineInterface.context = jasmineInterface.describe;
-
-// waits(0);
-// beforeEach(function(){
-// 	waitsFor(function(){
-// 	  if (typeof(CustomElements) == 'undefined') return false;
-// 	  return CustomElements.ready;
-// 	});
-// });
-
-// if (typeof window == "undefined" && typeof exports == "object") {
-//   extend(exports, jasmineInterface);
-// } else {
-//   extend(window, jasmineInterface);
-// }
-
-
-function withElement(title, html, fn) {
+function withElement(title, html, fn) {  // eslint-disable-line no-unused-vars
 	return describe(title, function() {
 		let div;
 		let element;
@@ -56,10 +33,10 @@ function withElement(title, html, fn) {
 			// Add some styling
 			let style = document.createElement('style');
 			style.innerHTML = `
-        pre {
-          background-color: yellow;
-        }
-      `;
+        		pre {
+          		background-color: yellow;
+        		}
+      		`;
 			div.appendChild(style);
 
 			document.body.appendChild(div);
