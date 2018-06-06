@@ -1,4 +1,5 @@
 /* eslint-env jasmine */
+<<<<<<< HEAD
 /* export withElement */
 
 // window.jasmine = jasmineRequire.core(jasmineRequire);
@@ -26,6 +27,12 @@
 
 function withElement(html, fn) {
 	return describe('', function() {
+=======
+/* exported withElement */
+
+function withElement(title, html, fn) {  // eslint-disable-line no-unused-vars
+	return describe(title, function() {
+>>>>>>> 892841ba589eb2d56f357d04a1eda1ddeb0ace2a
 		let div;
 		let element;
 		let oldTimeout;
@@ -57,7 +64,7 @@ function withElement(html, fn) {
 			let style = document.createElement('style');
 			style.innerHTML = `
         		pre {
-			        background-color: yellow;
+	          		background-color: yellow;
         		}
       		`;
 			div.appendChild(style);
