@@ -1,5 +1,5 @@
 /* eslint-env jasmine */
-/* global withElement */
+/* global withHtml */
 
 class TestElement extends HTMLElement {
 	constructor() {

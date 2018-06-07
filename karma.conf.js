@@ -9,12 +9,12 @@ module.exports = function(config) {
 			'karma-jasmine',
 			'karma-coverage',
 			'karma-html-reporter',
-			'jasmine-webcomponents'
+			'jasmine-html'
 		],
 
 		frameworks : [
 			'jasmine',
-			'jasmine-webcomponents'
+			'jasmine-html'
 		],
 
 		reporters : [

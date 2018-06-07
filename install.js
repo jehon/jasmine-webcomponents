@@ -4,5 +4,5 @@
 const fs = require('fs-extra')
 
 const srcpath = '../';
-const dstpath = 'node_modules/jasmine-webcomponents';
+const dstpath = 'node_modules/jasmine-html';
 fs.ensureSymlinkSync(srcpath, dstpath);
