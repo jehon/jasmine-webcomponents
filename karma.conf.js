@@ -8,13 +8,6 @@ module.exports = function(config) {
 				random: false
 			}
 		},
-		plugins : [
-			'karma-chrome-launcher',
-			// 'karma-firefox-launcher',
-			'karma-jasmine',
-			'karma-coverage',
-			'jasmine-html'
-		],
 
 		frameworks : [
 			'jasmine',

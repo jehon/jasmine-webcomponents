@@ -1,4 +1,4 @@
-Jasmine-Html
+Karma-Jasmine-Html
 =======
 
 To test a web components, you need to insert it in the page. This is what jasmine-html does.
