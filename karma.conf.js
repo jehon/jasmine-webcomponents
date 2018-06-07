@@ -13,7 +13,6 @@ module.exports = function(config) {
 			// 'karma-firefox-launcher',
 			'karma-jasmine',
 			'karma-coverage',
-			'karma-html-reporter',
 			'jasmine-html'
 		],
 
@@ -25,7 +24,6 @@ module.exports = function(config) {
 		reporters : [
 			'progress',
 			'coverage',
-			'html'
 		],
 
 		files : [
@@ -48,16 +46,13 @@ module.exports = function(config) {
 		// },
 
 		preprocessors: {
-			'static/**/*.js': [ 'coverage' ],
+			'*.js': [ 'coverage' ],
 		},
 
 		coverageReporter: {
 			type :  'lcov',
 			dir :   __dirname + '/',
 			subdir: 'target/'
-		},
-		htmlReporter: {
-			outputDir: __dirname + '/target/html/',
 		},
 	});
 };
