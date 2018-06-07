@@ -25,7 +25,7 @@
     "karma-jasmine": "^1.1.2"
   },
   "scripts": {
-    "link": "node install.js",
+    "install": "node install.js",
     "test": "karma start --single-run",
     "test-continuously": "karma start",
     "eslint": "eslint"
