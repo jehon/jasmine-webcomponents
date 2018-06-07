@@ -31,7 +31,10 @@ function withElement(options, fn) {  // eslint-disable-line no-unused-vars
 
 			// - Dump code for info
 			let pre = document.createElement('pre');
-			pre.innerHTML = options.html.split('<').join('&lt;').split('>').join('&gt');
+			pre.innerHTML = options.html
+				.split('&').join('&amp;')
+				.split('<').join('&lt;')
+				.split('>').join('&gt;');
 			div.appendChild(pre);
 
 			// Add some styling
