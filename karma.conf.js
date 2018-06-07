@@ -2,7 +2,12 @@
 /* eslint no-console: off */
 
 module.exports = function(config) {
-	var configuration = {
+	config.set({
+		client: {
+			jasmine: {
+				random: false
+			}
+		},
 		plugins : [
 			'karma-chrome-launcher',
 			// 'karma-firefox-launcher',
@@ -51,11 +56,8 @@ module.exports = function(config) {
 			dir :   __dirname + '/',
 			subdir: 'target/'
 		},
-
 		htmlReporter: {
 			outputDir: __dirname + '/target/html/',
 		},
-	};
-
-	config.set(configuration);
+	});
 };
