@@ -104,7 +104,7 @@ describe('in option mode', function() {
 		withHtml({
 			title: 'test with setupTime',
 			html: '<test-element></test-element>',
-			// beforeEach: false < default value >
+			beforeEach: false
 		}, function(element) {
 			it('should work', function() {
 				expect(element().tagName).toBe('TEST-ELEMENT');

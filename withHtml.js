@@ -6,13 +6,7 @@ function withHtml(options, fn) {  // eslint-disable-line no-unused-vars
 		options = {
 			html: options
 		};
-		options = Object.assign({
-			title: '',
-			setupTime: 1,
-			assertElementIsNotNull: false,
-			beforeEach: false,
-			forceList: false
-		}, options);
+		options = Object.assign({}, withHtml.defaultConfig, options);
 	}
 	let register = beforeAll;
 	let unregister = afterAll;
@@ -87,3 +81,11 @@ function withHtml(options, fn) {  // eslint-disable-line no-unused-vars
 		fn(() => element);
 	});
 }
+
+withHtml.defaultConfig = {
+	title: '',
+	setupTime: 1,
+	assertElementIsNotNull: false,
+	beforeEach: true,
+	forceList: false
+};
