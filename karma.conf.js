@@ -20,7 +20,8 @@ module.exports = function(config) {
 		],
 
 		files : [
-			'tests/*.js'
+			'tests/*.js',
+			{ pattern: '*.js', watched: true, served: false, included: false }
 		],
 
 		autoWatch : true,
