@@ -1,7 +1,7 @@
 /* eslint-env jasmine */
-/* exported withElement */
+/* exported withHtml */
 
-function withElement(options, fn) {  // eslint-disable-line no-unused-vars
+function withHtml(options, fn) {  // eslint-disable-line no-unused-vars
 	if (typeof(options) != 'object') {
 		options = {
 			html: options
@@ -9,20 +9,32 @@ function withElement(options, fn) {  // eslint-disable-line no-unused-vars
 		options = Object.assign({
 			title: '',
 			setupTime: 1,
-			assertElementIsNotNull: false
+			assertElementIsNotNull: false,
+			beforeEach: false,
+			forceList: false
 		}, options);
 	}
+	let register = beforeAll;
+	let unregister = afterAll;
+	if (options.beforeEach) {
+		register = beforeEach;
+		unregister = afterEach;
+	}
+
 	return describe('', function() {
 		let div;
 		let element;
 
-		beforeEach(function(done) {
+		register(function(done) {
 			// Build up the element
+			div = document.createElement('div');
 
 			// - The real component
-			div = document.createElement('div');
-			div.style='border: red solid 1px; min-height: 10px';
-			div.innerHTML = options.html.trim();
+			let container = document.createElement('div');
+			container.style='border: red solid 1px; min-height: 10px';
+			container.innerHTML = options.html.trim();
+
+			div.appendChild(container);
 
 			// - Add the title for completeness
 			let h3 = document.createElement('h3');
@@ -45,14 +57,17 @@ function withElement(options, fn) {  // eslint-disable-line no-unused-vars
         		}
       		`;
 			div.appendChild(style);
-			element = div.firstChild;
+			element = container.childNodes;
+			if (element.length == 1 && ! options.forceList) {
+				element = element[0];
+			}
 
 			document.body.appendChild(div);
 			setTimeout(done, options.setupTime);
 		});
 
 		// Register removing it afterwards
-		afterEach(function() {
+		unregister(function() {
 			document.body.removeChild(div);
 		});
 
@@ -61,6 +76,9 @@ function withElement(options, fn) {  // eslint-disable-line no-unused-vars
 			it('should initialize the object correctly', function() {
 				expect(element).not.toBeUndefined();
 				expect(element).not.toBeNull();
+				if (element instanceof NodeList) {
+					expect(element.length).toBeGreaterThan(0);
+				}
 			});
 		}
 

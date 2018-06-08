@@ -2,25 +2,21 @@
 /* eslint no-console: off */
 
 module.exports = function(config) {
-	var configuration = {
-		plugins : [
-			'karma-chrome-launcher',
-			// 'karma-firefox-launcher',
-			'karma-jasmine',
-			'karma-coverage',
-			'karma-html-reporter',
-			'jasmine-html'
-		],
+	config.set({
+		client: {
+			jasmine: {
+				random: false
+			}
+		},
 
 		frameworks : [
 			'jasmine',
-			'jasmine-webcomponents'
+			'jasmine-html'
 		],
 
 		reporters : [
 			'progress',
 			'coverage',
-			'html'
 		],
 
 		files : [
@@ -43,7 +39,7 @@ module.exports = function(config) {
 		// },
 
 		preprocessors: {
-			'static/**/*.js': [ 'coverage' ],
+			'*.js': [ 'coverage' ],
 		},
 
 		coverageReporter: {
@@ -51,11 +47,5 @@ module.exports = function(config) {
 			dir :   __dirname + '/',
 			subdir: 'target/'
 		},
-
-		htmlReporter: {
-			outputDir: __dirname + '/target/html/',
-		},
-	};
-
-	config.set(configuration);
+	});
 };
