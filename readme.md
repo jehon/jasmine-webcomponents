@@ -1,5 +1,4 @@
-Karma-Jasmine-Html
-=======
+# Jasmine-Html
 
 To test a web components, you need to insert it in the page. This is what jasmine-html does.
 
@@ -35,8 +34,7 @@ To ease testing and debugging, the element will be displayed on page surrounded 
 
 > TODO: show it here
 
-Installation
-===
+## Installation
 
 This library has no runtime depandancies. But if you need to test web components, you probably will need the polyfills.
 
@@ -46,8 +44,7 @@ Install it
 npm install -D jasmine-html
 ```
 
-Usage in Karma
-----
+## Usage in Karma
 
 Add it as a "framework" in karma.conf.js:
 
@@ -68,8 +65,7 @@ module.exports = function(config) {
 }
 ```
 
-Advanced options
-===
+## Advanced options
 
 You can provide some tweaking to the function:
 
@@ -98,9 +94,7 @@ The options are:
 |assertElementIsNotNull | false | Add some internal test to assert the elements are not null |
 |beforeEach | false | Create and destroy the object before/after each test instead of keeping is through the test|
 
-
-Technically
-===
+## Technically
 
 withHtml() wrap around a 'describe' call. So you can rewrite this calls:
 
@@ -131,3 +125,5 @@ describe(options.title, function() {
     it('does some test');
 });
 ```
+
+## How to contribute?
