@@ -92,7 +92,7 @@ The options are:
 |title| -empty- | Title for display, and for the internal (hidden) describe (see below technical details) |
 |setupTime| 1 (ms) | Time to wait for the object to being setup, if necessary|
 |assertElementIsNotNull | false | Add some internal test to assert the elements are not null |
-|beforeEach | false | Create and destroy the object before/after each test instead of keeping is through the test|
+|beforeEach | true | Create and destroy the object before/after each test instead of keeping is through the test|
 
 ## Technically
 
@@ -124,6 +124,19 @@ describe(options.title, function() {
 
     it('does some test');
 });
+```
+
+## BeforeAll?
+
+You can choose to have your component instantiated only once for you whole test suite. To make that, disable "options.beforeEach". But the order in which the "it()" commands are run are reported to be sometimes random. To disable randomness in your tests, add this in your karma.conf.js:
+
+```lang=javascript
+	config.set({
+		client: {
+			jasmine: {
+				random: false
+			}
+		},
 ```
 
 ## How to contribute?
