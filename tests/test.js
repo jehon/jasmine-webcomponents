@@ -107,14 +107,13 @@ describe('in option mode', function() {
 			beforeEach: false
 		}, function(element) {
 			it('should work', function() {
-				expect(element().tagName).toBe('TEST-ELEMENT');
 				element().incr();
 				expect(element().test).toBe(1);
 			});
 
 			it('should continue with the same object', function() {
-				expect(element().tagName).toBe('TEST-ELEMENT');
-				expect(element().test).toBe(1);
+				element().incr();
+				expect(element().test).toBe(2);
 			});
 		});
 	});
