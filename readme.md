@@ -41,7 +41,7 @@ This library has no runtime depandancies. But if you need to test web components
 Install it
 
 ```lang=bash
-npm install -D jasmine-html
+npm install -D karma-jasmine-html
 ```
 
 ## Usage in Karma
@@ -51,11 +51,13 @@ Add it as a "framework" in karma.conf.js:
 ```lang=javascript
 module.exports = function(config) {
     config.set({
+/* optional begin */
         plugins : [
             [...]
             'karma-jasmine',
-            'jasmine-html'
+            'karma-jasmine-html'
         ],
+/* optional end */
 
         frameworks : [
             'jasmine',
@@ -131,12 +133,19 @@ describe(options.title, function() {
 You can choose to have your component instantiated only once for you whole test suite. To make that, disable "options.beforeEach". But the order in which the "it()" commands are run are reported to be sometimes random. To disable randomness in your tests, add this in your karma.conf.js:
 
 ```lang=javascript
-	config.set({
-		client: {
-			jasmine: {
-				random: false
-			}
-		},
+    config.set({
+        client: {
+            jasmine: {
+                random: false
+            }
+        },
 ```
 
-## How to contribute?
+## To test
+
+To test this framework:
+
+```lang=javascript
+npm run link
+npm run test
+```
