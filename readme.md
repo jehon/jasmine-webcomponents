@@ -1,4 +1,6 @@
-# Jasmine-Html
+# Karma-Jasmine-Html
+
+[![Build Status](https://travis-ci.org/jehon/karma-jasmine-html.svg?branch=master)](https://travis-ci.org/jehon/karma-jasmine-html)
 
 To test a web components, you need to insert it in the page. This is what jasmine-html does.
 
