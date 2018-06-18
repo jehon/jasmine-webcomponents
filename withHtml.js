@@ -15,47 +15,52 @@ function withHtml(options, fn) {  // eslint-disable-line no-unused-vars
 		unregister = afterEach;
 	}
 
+	const _buildElement = () => {
+		// Build up the element
+		let div = document.createElement('div');
+
+		// - The real component
+		let container = document.createElement('div');
+		container.style='border: red solid 1px; min-height: 10px';
+		container.innerHTML = options.html.trim();
+
+		div.appendChild(container);
+
+		// - Add the title for completeness
+		let h3 = document.createElement('h3');
+		h3.innerHTML = 'Test: ' + options.title;
+		div.appendChild(h3);
+
+		// - Dump code for info
+		let pre = document.createElement('pre');
+		pre.innerHTML = options.html
+			.split('&').join('&amp;')
+			.split('<').join('&lt;')
+			.split('>').join('&gt;');
+		div.appendChild(pre);
+
+		// Add some styling
+		let style = document.createElement('style');
+		style.innerHTML = `
+			pre {
+				background-color: yellow;
+			}
+		`;
+		div.appendChild(style);
+		return { div, container };
+	};
+
 	return describe('', function() {
 		let div;
 		let element;
 
 		register(function(done) {
-			// Build up the element
-			div = document.createElement('div');
-
-			// - The real component
-			let container = document.createElement('div');
-			container.style='border: red solid 1px; min-height: 10px';
-			container.innerHTML = options.html.trim();
-
-			div.appendChild(container);
-
-			// - Add the title for completeness
-			let h3 = document.createElement('h3');
-			h3.innerHTML = 'Test: ' + options.title;
-			div.appendChild(h3);
-
-			// - Dump code for info
-			let pre = document.createElement('pre');
-			pre.innerHTML = options.html
-				.split('&').join('&amp;')
-				.split('<').join('&lt;')
-				.split('>').join('&gt;');
-			div.appendChild(pre);
-
-			// Add some styling
-			let style = document.createElement('style');
-			style.innerHTML = `
-        		pre {
-	          		background-color: yellow;
-        		}
-      		`;
-			div.appendChild(style);
+			let container;
+			({ div, container } = _buildElement());
 			element = container.childNodes;
 			if (element.length == 1 && ! options.forceList) {
 				element = element[0];
 			}
-
 			document.body.appendChild(div);
 			setTimeout(done, options.setupTime);
 		});
