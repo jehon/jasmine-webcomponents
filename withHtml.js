@@ -54,7 +54,7 @@ function withHtml(options, fn) {  // eslint-disable-line no-unused-vars
 		let div;
 		let element;
 
-		register(function(done) {
+		register((done) => {
 			let container;
 			({ div, container } = _buildElement());
 			element = container.childNodes;
@@ -66,9 +66,7 @@ function withHtml(options, fn) {  // eslint-disable-line no-unused-vars
 		});
 
 		// Register removing it afterwards
-		unregister(function() {
-			document.body.removeChild(div);
-		});
+		unregister(() => document.body.removeChild(div));
 
 		if (options.assertElementIsNotNull) {
 			// Make some tests just for completeness
