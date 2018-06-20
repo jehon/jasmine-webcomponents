@@ -2,14 +2,15 @@
 /* exported withHtml */
 
 const withHtml = (function() {
-	const _buildContainer = () => {
+	const _buildContainer = (options) => {
 		// - The real component
 		let container = document.createElement('div');
 		container.style='border: red solid 1px; min-height: 10px';
 		container.innerHTML = options.html.trim();
+		return container;
 	};
 
-	const _buildElement = (container) => {
+	const _buildElement = (options, container) => {
 		// Build up the element
 		let div = document.createElement('div');
 
@@ -36,21 +37,10 @@ const withHtml = (function() {
 		return div;
 	};
 
-	const _extractElement = (container) => {
+	const _extractElement = (options, container) => {
 		let element = container.childNodes;
 		if (element.length == 1 && ! options.forceList) {
 			element = element[0];
-		}
-
-		if (options.assertElementIsNotNull) {
-			// Make some tests just for completeness
-			it('should initialize the object correctly', function() {
-				expect(element).not.toBeUndefined();
-				expect(element).not.toBeNull();
-				if (element instanceof NodeList) {
-					expect(element.length).toBeGreaterThan(0);
-				}
-			});
 		}
 
 		return element;
@@ -71,13 +61,24 @@ const withHtml = (function() {
 			let element;
 
 			beforeEachOrAll((done) => {
-				let container = _buildContainer();
-				div = _buildElement(container);
-				element = _extractElement(container);
+				let container = _buildContainer(options);
+				div = _buildElement(options, container);
+				element = _extractElement(options, container);
 				document.body.appendChild(div);
 				setTimeout(done, options.setupTime);
 			});
 
+			if (options.assertElementIsNotNull) {
+				// Make some tests just for completeness
+				it('should initialize the object correctly', function() {
+					expect(element).not.toBeUndefined();
+					expect(element).not.toBeNull();
+					if (element instanceof NodeList) {
+						expect(element.length).toBeGreaterThan(0);
+					}
+				});
+			}
+	
 			// Register removing it afterwards
 			afterEachOrAll(() => document.body.removeChild(div));
 
@@ -96,4 +97,4 @@ const withHtml = (function() {
 	};
 
 	return withHtml;
-})
+})();
