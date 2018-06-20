@@ -1,20 +1,7 @@
 /* eslint-env jasmine */
 /* exported withHtml */
 
-function withHtml(options, fn) {  // eslint-disable-line no-unused-vars
-	if (typeof(options) != 'object') {
-		options = {
-			html: options
-		};
-		options = Object.assign({}, withHtml.defaultConfig, options);
-	}
-	let beforeEachOrAll = beforeAll;
-	let afterEachOrAll = afterAll;
-	if (options.beforeEach) {
-		beforeEachOrAll = beforeEach;
-		afterEachOrAll = afterEach;
-	}
-
+const withHtml = (function() {
 	const _buildContainer = () => {
 		// - The real component
 		let container = document.createElement('div');
@@ -69,31 +56,44 @@ function withHtml(options, fn) {  // eslint-disable-line no-unused-vars
 		return element;
 	};
 
-	return describe('', function() {
-		let div;
-		let element;
+	function withHtml(options, fn) {
+		if (typeof(options) != 'object') {
+			options = {
+				html: options
+			};
+		}
+		options = Object.assign({}, withHtml.defaultConfig, options);
+		let beforeEachOrAll = (options.beforeEach ? beforeEach : beforeAll);
+		let afterEachOrAll = (options.beforeEach ? afterEach : afterAll);
 
-		beforeEachOrAll((done) => {
-			let container = _buildContainer();
-			div = _buildElement(container);
-			element = _extractElement(container);
-			document.body.appendChild(div);
-			setTimeout(done, options.setupTime);
+		return describe('', function() {
+			let div;
+			let element;
+
+			beforeEachOrAll((done) => {
+				let container = _buildContainer();
+				div = _buildElement(container);
+				element = _extractElement(container);
+				document.body.appendChild(div);
+				setTimeout(done, options.setupTime);
+			});
+
+			// Register removing it afterwards
+			afterEachOrAll(() => document.body.removeChild(div));
+
+			// We need to pass it as a function, because as we start this function
+			// element is not already defined
+			fn(() => element);
 		});
+	}
 
-		// Register removing it afterwards
-		afterEachOrAll(() => document.body.removeChild(div));
+	withHtml.defaultConfig = {
+		title: '',
+		setupTime: 1,
+		assertElementIsNotNull: false,
+		beforeEach: true,
+		forceList: false
+	};
 
-		// We need to pass it as a function, because as we start this function
-		// element is not already defined
-		fn(() => element);
-	});
-}
-
-withHtml.defaultConfig = {
-	title: '',
-	setupTime: 1,
-	assertElementIsNotNull: false,
-	beforeEach: true,
-	forceList: false
-};
+	return withHtml;
+})
