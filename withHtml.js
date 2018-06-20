@@ -8,21 +8,24 @@ function withHtml(options, fn) {  // eslint-disable-line no-unused-vars
 		};
 		options = Object.assign({}, withHtml.defaultConfig, options);
 	}
-	let register = beforeAll;
-	let unregister = afterAll;
+	let beforeEachOrAll = beforeAll;
+	let afterEachOrAll = afterAll;
 	if (options.beforeEach) {
-		register = beforeEach;
-		unregister = afterEach;
+		beforeEachOrAll = beforeEach;
+		afterEachOrAll = afterEach;
 	}
 
-	const _buildElement = () => {
-		// Build up the element
-		let div = document.createElement('div');
-
+	const _buildContainer = () => {
 		// - The real component
 		let container = document.createElement('div');
 		container.style='border: red solid 1px; min-height: 10px';
 		container.innerHTML = options.html.trim();
+	};
+
+	const _buildElement = (container) => {
+		// Build up the element
+		let div = document.createElement('div');
+
 
 		div.appendChild(container);
 
@@ -41,32 +44,16 @@ function withHtml(options, fn) {  // eslint-disable-line no-unused-vars
 
 		// Add some styling
 		let style = document.createElement('style');
-		style.innerHTML = `
-			pre {
-				background-color: yellow;
-			}
-		`;
+		style.innerHTML = 'pre { background-color: yellow; }';
 		div.appendChild(style);
-		return { div, container };
+		return div;
 	};
 
-	return describe('', function() {
-		let div;
-		let element;
-
-		register((done) => {
-			let container;
-			({ div, container } = _buildElement());
-			element = container.childNodes;
-			if (element.length == 1 && ! options.forceList) {
-				element = element[0];
-			}
-			document.body.appendChild(div);
-			setTimeout(done, options.setupTime);
-		});
-
-		// Register removing it afterwards
-		unregister(() => document.body.removeChild(div));
+	const _extractElement = (container) => {
+		let element = container.childNodes;
+		if (element.length == 1 && ! options.forceList) {
+			element = element[0];
+		}
 
 		if (options.assertElementIsNotNull) {
 			// Make some tests just for completeness
@@ -78,6 +65,24 @@ function withHtml(options, fn) {  // eslint-disable-line no-unused-vars
 				}
 			});
 		}
+
+		return element;
+	};
+
+	return describe('', function() {
+		let div;
+		let element;
+
+		beforeEachOrAll((done) => {
+			let container = _buildContainer();
+			div = _buildElement(container);
+			element = _extractElement(container);
+			document.body.appendChild(div);
+			setTimeout(done, options.setupTime);
+		});
+
+		// Register removing it afterwards
+		afterEachOrAll(() => document.body.removeChild(div));
 
 		// We need to pass it as a function, because as we start this function
 		// element is not already defined
