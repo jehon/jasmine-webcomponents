@@ -132,7 +132,7 @@ describe(options.title, function() {
 });
 ```
 
-## BeforeAll?
+## BeforeAll or BeforeEach
 
 You can choose to have your component instantiated only once for you whole test suite. To make that, disable "options.beforeEach". But the order in which the "it()" commands are run are reported to be sometimes random. To disable randomness in your tests, add this in your karma.conf.js:
 
