@@ -1,6 +1,6 @@
 # Karma-Jasmine-Html
 
-[![Build Status](https://travis-ci.org/jehon/karma-jasmine-html.svg?branch=master)](https://travis-ci.org/jehon/karma-jasmine-html)
+[![Build Status](https://travis-ci.com/jehon/karma-jasmine-html.svg?branch=master)](https://travis-ci.com/jehon/karma-jasmine-html)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/26756c4f95a238b2d57e/test_coverage)](https://codeclimate.com/github/jehon/karma-jasmine-html/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/26756c4f95a238b2d57e/maintainability)](https://codeclimate.com/github/jehon/karma-jasmine-html/maintainability)
 
