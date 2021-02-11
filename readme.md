@@ -1,3 +1,5 @@
+# Obsolete as of 2021-02-11
+
 # Karma-Jasmine-Html
 
 [![Build Status](https://travis-ci.com/jehon/karma-jasmine-html.svg?branch=master)](https://travis-ci.com/jehon/karma-jasmine-html)
